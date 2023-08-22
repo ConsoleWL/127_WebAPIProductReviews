@@ -3,6 +3,7 @@ using _127_WebAPIProductsReviews.Models;
 using _127_WebAPIProductsReviews.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Immutable;
 
 namespace _127_WebAPIProductsReviews.Controllers
 {
@@ -36,8 +37,17 @@ namespace _127_WebAPIProductsReviews.Controllers
             return Ok(review);
         }
 
+        [HttpGet("product/{id}")]
+        public IActionResult GetByProductId(int id)
+        {
+            List<ICollection<Review>> reviews = _context.Products
+                .Where(f => f.Id == id)
+                .Select(f => f.Reviews)
+                .ToList();
 
-        // not done
+            return Ok(reviews);
+        }
+
         [HttpPost("{productId}")]
         public IActionResult Post(int productId, [FromBody] Review review)
         {
@@ -52,7 +62,6 @@ namespace _127_WebAPIProductsReviews.Controllers
             return Ok(review);
         }
 
-        // not done
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Review review)
         {

@@ -1,6 +1,8 @@
 ﻿using _127_WebAPIProductsReviews.Data;
 using _127_WebAPIProductsReviews.Models;
+using _127_WebAPIProductsReviews.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace _127_WebAPIProductsReviews.Controllers
 {
@@ -37,6 +39,35 @@ namespace _127_WebAPIProductsReviews.Controllers
                 products = products.Where(f => f.Price <= price).ToList();
             }
             return Ok(products);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            Product pr = _context.Products.FirstOrDefault(f => f.Id == id);
+
+            if (pr is null)
+                return NotFound();
+
+            var product = _context.Products
+                .Include(f => f.Reviews)
+                .Select(f => new ProductDTO
+                {
+                    Id = f.Id,
+                    Name = f.Name,
+                    Price = f.Price,
+                    AverageRating = 20, // fix later
+                    Reviews = f.Reviews.Select(r => new ReviewDTO
+                    {
+                        Id = r.Id,
+                        Text = r.Text,
+                        Rating = r.Rating
+                    }).ToList()
+                }).FirstOrDefault(f => f.Id == id);
+                
+            
+            
+            return Ok(product);
         }
 
         [HttpPost]

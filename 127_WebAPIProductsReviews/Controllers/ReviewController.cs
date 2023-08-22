@@ -1,6 +1,8 @@
 ﻿using _127_WebAPIProductsReviews.Data;
 using _127_WebAPIProductsReviews.Models;
+using _127_WebAPIProductsReviews.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace _127_WebAPIProductsReviews.Controllers
 {
@@ -20,6 +22,7 @@ namespace _127_WebAPIProductsReviews.Controllers
         {
             List<Review> reviews = _context.Reviews.ToList();
             return Ok(reviews);
+
         }
 
         [HttpGet("{id}")]
@@ -39,24 +42,46 @@ namespace _127_WebAPIProductsReviews.Controllers
             if (review is null)
                 return BadRequest();
 
+            review.ProductId = productId;
+
             _context.Reviews.Add(review);
             _context.SaveChanges();
 
             return Ok(review);
         }
 
-        //public IActionResult Put(int id, [FromBody] Review review)
-        //{
-        //    if (review is null)
-        //        return BadRequest();
+        [HttpPut("id")]
+        public IActionResult Put(int id,  [FromBody] Review review)
+        {
+            if (review is null)
+                return BadRequest();
 
-        //    Review existingReview = _context.Reviews.FirstOrDefault(f => f.Id == review.Id);
+            Review existingReview = _context.Reviews.FirstOrDefault(f => f.Id == id);
 
-        //    if (existingReview is null)
-        //        return NotFound($"There is no Review with Id {review.Id}");
+            if (existingReview is null)
+                return NotFound($"There is no Review with Id {id}");
 
-        //    existingReview
-        //}
+            existingReview.Text = review.Text;
+            existingReview.Rating = review.Rating;
+
+            _context.SaveChanges();
+
+            return Ok(existingReview);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            Review review = _context.Reviews.FirstOrDefault(f => f.Id == id);
+
+            if (review is null)
+                return NotFound();
+
+            _context.Reviews.Remove(review);
+            _context.SaveChanges();
+
+            return Ok(review);
+        }
 
     }
 }

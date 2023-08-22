@@ -16,9 +16,26 @@ namespace _127_WebAPIProductsReviews.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get([FromQuery] string? maxPrice)
         {
+            double price = 0;
+
+            try
+            {
+                price = Convert.ToDouble(maxPrice);
+
+            }
+            catch (Exception)
+            {
+                return BadRequest("The maxPrice shoud contain only numbers!");
+            }
+            
             List<Product> products = _context.Products.ToList();
+
+            if(maxPrice != null)
+            {
+                products = products.Where(f => f.Price <= price).ToList();
+            }
             return Ok(products);
         }
 

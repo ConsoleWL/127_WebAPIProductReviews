@@ -36,6 +36,8 @@ namespace _127_WebAPIProductsReviews.Controllers
             return Ok(review);
         }
 
+
+        // not done
         [HttpPost("{productId}")]
         public IActionResult Post(int productId, [FromBody] Review review)
         {
@@ -50,8 +52,9 @@ namespace _127_WebAPIProductsReviews.Controllers
             return Ok(review);
         }
 
-        [HttpPut("id")]
-        public IActionResult Put(int id,  [FromBody] Review review)
+        // not done
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody] Review review)
         {
             if (review is null)
                 return BadRequest();

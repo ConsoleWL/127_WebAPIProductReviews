@@ -41,34 +41,32 @@ namespace _127_WebAPIProductsReviews.Controllers
             return Ok(products);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
-            Product pr = _context.Products.FirstOrDefault(f => f.Id == id);
+        //[HttpGet("{id}")]
+        //public IActionResult Get(int id)
+        //{
+        //    Product pr = _context.Products.FirstOrDefault(f => f.Id == id);
 
-            if (pr is null)
-                return NotFound();
+        //    if (pr is null)
+        //        return NotFound();
 
-            var product = _context.Products
-                .Include(f => f.Reviews)
-                .Select(f => new ProductDTO
-                {
-                    Id = f.Id,
-                    Name = f.Name,
-                    Price = f.Price,
-                    AverageRating = 20, // fix later
-                    Reviews = f.Reviews.Select(r => new ReviewDTO
-                    {
-                        Id = r.Id,
-                        Text = r.Text,
-                        Rating = r.Rating
-                    }).ToList()
-                }).FirstOrDefault(f => f.Id == id);
+        //    var product = _context.Products
+        //        .Include(f => f.Reviews)
+        //        .Select(f => new ProductDTO
+        //        {
+        //            Id = f.Id,
+        //            Name = f.Name,
+        //            Price = f.Price,
+        //            AverageRating = 20, // fix later
+        //            Reviews = f.Reviews.Select(r => new ReviewDTO
+        //            {
+        //                Id = r.Id,
+        //                Text = r.Text,
+        //                Rating = r.Rating
+        //            }).ToList()
+        //        }).FirstOrDefault(f => f.Id == id);
                 
-            
-            
-            return Ok(product);
-        }
+        //    return Ok(product);
+        //}
 
         [HttpPost]
         public IActionResult Post([FromBody] Product product)

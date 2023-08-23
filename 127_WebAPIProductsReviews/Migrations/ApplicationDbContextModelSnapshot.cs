@@ -25,7 +25,6 @@ namespace _127_WebAPIProductsReviews.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<double>("Price")
@@ -81,7 +80,6 @@ namespace _127_WebAPIProductsReviews.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");

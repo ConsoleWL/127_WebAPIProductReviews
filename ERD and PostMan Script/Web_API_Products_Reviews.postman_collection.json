@@ -1,0 +1,314 @@
+{
+	"info": {
+		"_postman_id": "b2d2de4e-60ae-442d-9911-00bccf1ef613",
+		"name": "Web_API_Products_Reviews",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28100906"
+	},
+	"item": [
+		{
+			"name": "Review",
+			"item": [
+				{
+					"name": "Get Review",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7048/api/review/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7048",
+							"path": [
+								"api",
+								"review",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7048/api/review/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7048",
+							"path": [
+								"api",
+								"review",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Reviews  By  ProductId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7048/api/review/product/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7048",
+							"path": [
+								"api",
+								"review",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Review",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n    // add product Id in URL\r\n{                               \r\n  \"text\": \"Review from Nikki\",\r\n  \"rating\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7048/api/review/9",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7048",
+							"path": [
+								"api",
+								"review",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Review",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "            // Add a product Id in URL because without Product there is no point to add a review\r\n{ \r\n    \"text\": \"Updating My Review\",\r\n    \"rating\": \"50\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7048/api/review/9",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7048",
+							"path": [
+								"api",
+								"review",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Review",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7048/api/review/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7048",
+							"path": [
+								"api",
+								"review",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7048/api/product/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7048",
+							"path": [
+								"api",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7048/api/product/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7048",
+							"path": [
+								"api",
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products with Max Price",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7048/api/product?maxPrice=50",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7048",
+							"path": [
+								"api",
+								"product"
+							],
+							"query": [
+								{
+									"key": "maxPrice",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Nikki DotNet Programmer\",\r\n  \"price\": 99\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7048/api/product/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7048",
+							"path": [
+								"api",
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\":\"\",\r\n    \"Price\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7048/api/product/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7048",
+							"path": [
+								"api",
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Poduct",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7048/api/product/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7048",
+							"path": [
+								"api",
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

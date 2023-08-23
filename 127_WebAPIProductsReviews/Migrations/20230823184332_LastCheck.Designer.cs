@@ -10,8 +10,8 @@ using _127_WebAPIProductsReviews.Data;
 namespace _127_WebAPIProductsReviews.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230822175632_ForgotToAddForeignKey")]
-    partial class ForgotToAddForeignKey
+    [Migration("20230823184332_LastCheck")]
+    partial class LastCheck
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,7 +28,6 @@ namespace _127_WebAPIProductsReviews.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<double>("Price")
@@ -84,7 +83,6 @@ namespace _127_WebAPIProductsReviews.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");

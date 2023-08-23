@@ -83,7 +83,7 @@ namespace _127_WebAPIProductsReviews.Controllers
 
             existingReview.Text = review.Text;
             existingReview.Rating = review.Rating;
-            existingReview.ProductId = review.ProductId;
+            existingReview.ProductId = id;
 
             _context.SaveChanges();
 

@@ -32,7 +32,21 @@ namespace _127_WebAPIProductsReviews.Controllers
                 return BadRequest("The maxPrice shoud contain only numbers!");
             }
 
-            List<Product> products = _context.Products.ToList();
+            List<ProductDTO> products = _context.Products
+                .Select(d => new ProductDTO
+                {
+                    Id = d.Id,
+                    Name = d.Name,
+                    Price = d.Price,
+                    AverageRating = d.Reviews.Average(r => r.Rating),
+                    Reviews = d.Reviews.Select(c => new ReviewDTO
+                    {
+                        Id = c.Id,
+                        Text = c.Text,
+                        Rating = c.Rating
+                    }).ToList()
+                })
+                .ToList();
 
             if (maxPrice != null)
             {
@@ -52,14 +66,14 @@ namespace _127_WebAPIProductsReviews.Controllers
                     Id = f.Id,
                     Name = f.Name,
                     Price = f.Price,
-                    AverageRating = 5, //change it later
 
                     Reviews = f.Reviews.Select(r => new ReviewDTO
                     {
                         Id = r.Id,
                         Text = r.Text,
                         Rating = r.Rating
-                    }).ToList()
+                    }).ToList(),
+                    AverageRating =  f.Reviews.Average(r=>r.Rating) 
                 });
 
             if (products is null)

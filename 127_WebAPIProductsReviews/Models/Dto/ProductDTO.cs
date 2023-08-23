@@ -8,6 +8,6 @@
         public double AverageRating { get; set; }
 
         // Nav props
-        public ICollection<Review> Reviews { get; set; }
+        public ICollection<ReviewDTO> Reviews { get; set; }
     }
 }

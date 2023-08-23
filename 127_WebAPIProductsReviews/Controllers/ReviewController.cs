@@ -45,6 +45,9 @@ namespace _127_WebAPIProductsReviews.Controllers
                 .Select(f => f.Reviews)
                 .ToList();
 
+            if (reviews is null)
+                return NotFound();
+
             return Ok(reviews);
         }
 
@@ -56,7 +59,7 @@ namespace _127_WebAPIProductsReviews.Controllers
             // My plan was here is to check if the Product with this Id does exist
             // But when I do that Product product = _context.Products.FirstOrDefault(f => f.Id == id);
             //A possible object cycle was detected. This can either be due to a cycle or if the object depth is larger than the maximum allowed depth of 32.
-            // why is that happening ... I can't figure it out.
+            // why is that happeningw ... I can't figure it out.
             // The problem if I don't check if product exist then it add everything alright
             // but then another problem if I put not existing Id for product in URL then program crashes when it's trying to save review. because we don't have that Product in DB
             review.ProductId = productId;
@@ -80,6 +83,7 @@ namespace _127_WebAPIProductsReviews.Controllers
 
             existingReview.Text = review.Text;
             existingReview.Rating = review.Rating;
+            existingReview.ProductId = review.ProductId;
 
             _context.SaveChanges();
 

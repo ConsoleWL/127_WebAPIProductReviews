@@ -31,42 +31,43 @@ namespace _127_WebAPIProductsReviews.Controllers
             {
                 return BadRequest("The maxPrice shoud contain only numbers!");
             }
-            
+
             List<Product> products = _context.Products.ToList();
 
-            if(maxPrice != null)
+            if (maxPrice != null)
             {
                 products = products.Where(f => f.Price <= price).ToList();
             }
             return Ok(products);
+
         }
 
-        //[HttpGet("{id}")]
-        //public IActionResult Get(int id)
-        //{
-        //    Product pr = _context.Products.FirstOrDefault(f => f.Id == id);
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            IQueryable<ProductDTO> products = _context.Products
+                .Where(f => f.Id == id)
+                .Select(f => new ProductDTO
+                {
+                    Id = f.Id,
+                    Name = f.Name,
+                    Price = f.Price,
+                    AverageRating = 5, //change it later
 
-        //    if (pr is null)
-        //        return NotFound();
+                    Reviews = f.Reviews.Select(r => new ReviewDTO
+                    {
+                        Id = r.Id,
+                        Text = r.Text,
+                        Rating = r.Rating
+                    }).ToList()
+                });
 
-        //    var product = _context.Products
-        //        .Include(f => f.Reviews)
-        //        .Select(f => new ProductDTO
-        //        {
-        //            Id = f.Id,
-        //            Name = f.Name,
-        //            Price = f.Price,
-        //            AverageRating = 20, // fix later
-        //            Reviews = f.Reviews.Select(r => new ReviewDTO
-        //            {
-        //                Id = r.Id,
-        //                Text = r.Text,
-        //                Rating = r.Rating
-        //            }).ToList()
-        //        }).FirstOrDefault(f => f.Id == id);
-                
-        //    return Ok(product);
-        //}
+            if (products is null)
+                return NotFound();
+
+            return Ok(products);
+
+        }
 
         [HttpPost]
         public IActionResult Post([FromBody] Product product)
@@ -92,7 +93,7 @@ namespace _127_WebAPIProductsReviews.Controllers
 
             existingProduct.Name = product.Name;
             existingProduct.Price = existingProduct.Price;
-
+            // Check if here is Raiting as well;
             _context.SaveChanges();
             return Ok(existingProduct);
         }

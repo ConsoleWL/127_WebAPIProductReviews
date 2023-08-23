@@ -123,7 +123,7 @@ namespace _127_WebAPIProductsReviews.Controllers
             _context.Products.Remove(product);
             _context.SaveChanges();
 
-            return Ok(product);
+            return NoContent();
         }
     }
 }

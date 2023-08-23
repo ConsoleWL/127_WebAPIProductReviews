@@ -101,7 +101,7 @@ namespace _127_WebAPIProductsReviews.Controllers
             _context.Reviews.Remove(review);
             _context.SaveChanges();
 
-            return Ok(review);
+            return NoContent();
         }
 
     }

@@ -18,21 +18,9 @@ namespace _127_WebAPIProductsReviews.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get([FromQuery] string? maxPrice)
+        public IActionResult Get([FromQuery] double? maxPrice)
         {
-            double price = 0;
-
-            try
-            {
-                price = Convert.ToDouble(maxPrice);
-
-            }
-            catch (Exception)
-            {
-                return BadRequest("The maxPrice shoud contain only numbers!");
-            }
-
-            var products = _context.Products
+            List<ProductDTO> products = _context.Products
                 .Select(d => new ProductDTO
                 {
                     Id = d.Id,
@@ -50,8 +38,9 @@ namespace _127_WebAPIProductsReviews.Controllers
 
             if (maxPrice != null)
             {
-                products = products.Where(f => f.Price <= price).ToList();
+                products = products.Where(p => p.Price <= maxPrice).ToList();
             }
+
             return Ok(products);
 
         }
@@ -73,7 +62,7 @@ namespace _127_WebAPIProductsReviews.Controllers
                         Text = r.Text,
                         Rating = r.Rating
                     }).ToList(),
-                    AverageRating = Math.Round(f.Reviews.Average(r => r.Rating),2) //f.Reviews.Average(r=>r.Rating) // 3.6666666666666665
+                    AverageRating = Math.Round(f.Reviews.Average(r => r.Rating),2) 
                 });
 
             if (products is null)
